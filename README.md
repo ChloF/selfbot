@@ -10,15 +10,9 @@ This is a selfbot made by me to add a few nice features that I wanted in discord
 Node.js can be found at:
 https://nodejs.org/
 
-Then open a command window in the '*app*' folder and type in these two commands:
+After installing that, run the '*installDeps.bat*' file in the '*app*' folder.
 
-`npm install Discord.js -g`
-
-and
-
-`npm install pm2 -g`
-
-**You also need to add a file named "config.json" in the "app" folder. In this file you need to put:** 
+**You also need to add a file named "config.json" in the "app" folder. In this file you need to put:**
 
 `{"token" : "YOURDISCORDUSERTOKEN"}`
 
@@ -49,7 +43,7 @@ The shortcuts are:
   `disapproval`,
   `facepalm` and
   `facedesk`
-  
+
 
 **Emojification**: Have you ever had a point so strong normal letters couldn't get it across? Now you can make it better... with Emojis! This command converts letters into letter Emojis. The way to use this command is `{[Message]`, for example `{hello`.
 
