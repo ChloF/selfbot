@@ -22,6 +22,7 @@ To find out your discord user token, open discord and press Ctrl+Shift+I. Naviga
 
 #### DO NOT I repeat, **DO NOT** tell **ANYONE** this token. This will give them total access to your account, which, unsurprisingly, is very bad. So don't tell anyone. No one. Nobody. Not a soul. You get the picture.
 
+(Yes my token is on some of the older commits but I changed it. Don't go trying anything funny. I'm looking at you ಠ_ಠ)
 
 Once you have set all this up, simply run the '*run.bat*' file in the '*app*' folder to run the bot.
 
