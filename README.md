@@ -44,6 +44,10 @@ The shortcuts are:
   `facepalm` and
   `facedesk`
 
+The shortcuts are all stored in the file '*shortcuts.json*', to add extra shortcuts, you need to edit this file. Every command needs to be on a new line (The previous one being terminated with a comma). The syntax is like this:
+
+`"[shortcut name]" : "[shortcut text]"`
+
 
 **Emojification**: Have you ever had a point so strong normal letters couldn't get it across? Now you can make it better... with Emojis! This command converts letters into letter Emojis. The way to use this command is `{[Message]`, for example `{hello`.
 
