@@ -10,9 +10,9 @@ This is a selfbot made by me to add a few nice features that I wanted in discord
 Node.js can be found at:
 https://nodejs.org/
 
-After installing that, run the '*installDeps.bat*' file in the '*app*' folder.
+After installing that, run the '*init.bat*' file in the '*app*' folder, follow the instructions it gives you. Input the name then press enter for everything until the end when you have to say: "Yes".
 
-**You also need to add a file named "config.json" in the "app" folder. In this file you need to put:**
+**You also need to add a file named '*config.json*' in the '*app*' folder. In this file you need to put:**
 
 `{"token" : "YOURDISCORDUSERTOKEN"}`
 
