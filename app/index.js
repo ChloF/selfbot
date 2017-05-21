@@ -3,6 +3,8 @@ const fs = require('fs');
 let client = new Discord.Client();
 
 var config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+var shortcuts = JSON.parse(fs.readFileSync('./shortcuts.json', 'utf8'));
+
 client.login(config["token"]);
 
 client.on('message', message =>
@@ -27,24 +29,9 @@ client.on('message', message =>
 //Example : '/lenny', ( ͡° ͜ʖ ͡°)
 function ProcessShortcut(message)
 {
-  const shortcuts = new Map([
-    ['lenny', '( ͡° ͜ʖ ͡°)'],
-    ['hidinglenny', '┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴'],
-    ['shrug', '¯\_(ツ)_/¯'],
-    ['justright', '✋😩👌'],
-    ['tableflip', '(╯°□°）╯︵ ┻━┻'],
-    ['unflip', '┬──┬﻿ ノ( ゜-゜ノ)'],
-    ['disapproval', 'ಠ_ಠ'],
-    ['facepalm', 'https://giphy.com/gifs/reactionseditor-classic-facepalm-3og0INyCmHlNylks9O'],
-    ['facedesk', 'https://giphy.com/gifs/to-aru-kagaku-no-railgun-JRMvrNMKfjqmI']
-  ]);
-
   let shortcut = message.content.slice(1);
-  if (shortcuts.has(shortcut))
-  {
-    setTimeout(() => {message.edit(shortcuts.get(shortcut))}, 0);
-    return;
-  }
+  setTimeout(() => {message.edit(shortcuts[shortcut])}, 0);
+  return;
 }
 
 //Converts the text in your message to emojis
