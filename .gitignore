@@ -60,3 +60,5 @@ typings/
 # config file
 config.json
 
+# package file
+package.json
