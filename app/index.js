@@ -14,8 +14,8 @@ client.on('message', message =>
   let shortcutPrefix = '/';
   if (message.content.indexOf(shortcutPrefix) != -1) ProcessShortcut(message);
 
-  let emojifyPrefix = '{';
-  if (message.content.startsWith(emojifyPrefix)) Emojify(message);
+  let emojifyPrefix = '<emoji>';
+  if (message.content.indexOf(emojifyPrefix) != -1) Emojify(message);
 
   let lmgtfyPrefix = '|';
   if (message.content.startsWith(lmgtfyPrefix)) LMGTFYSearch(message);
@@ -36,12 +36,32 @@ function ProcessShortcut(message)
     text = text.replace(`/${key}`, shortcuts[key]);
   }
   setTimeout(() => {message.edit(text)}, 0);
+  return message;
 }
 
 //Converts the text in your message to emojis
 //Usage : '<[Message]'
 //Example : '<I am obnoxious', https://cdn.discordapp.com/attachments/202157023184420865/315406499231039488/unknown.png
 function Emojify(message)
+{
+  let text = message.content;
+
+  while (text.indexOf('<emoji>') != -1)
+  {
+    emojiText = SubstringBetweenDelimiters(text, '<emoji>', '</emoji>');
+
+    emojiText = StringToEmojis (emojiText.toLowerCase());
+
+    text = text.replace(SubstringBetweenDelimiters(text, '<emoji>', '</emoji>'), emojiText);
+    text = text.replace('<emoji>', '');
+    text = text.replace('</emoji>', '');
+  }
+
+  setTimeout(() => {message.edit(text)}, 0);
+  return message;
+}
+
+function StringToEmojis (str)
 {
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
 
@@ -54,27 +74,31 @@ function Emojify(message)
     ['.', 'black_small_square']
   ])
 
-  let text = message.content.slice(1).toLowerCase();
-
-  var newMessage = '';
-
-  for (var i = 0; i < text.length; i++)
+  let emojiText = '';
+  for (var i = 0; i < str.length; i++)
   {
-    if (alphabet.indexOf(text.charAt(i)) != -1)
+    if (alphabet.indexOf(str.charAt(i)) != -1)
     {
-      newMessage += `:regional_indicator_${text.charAt(i)}:`;
+      emojiText += `:regional_indicator_${str.charAt(i)}:`;
     }
-    else if(specials.has(text.charAt(i)))
+    else if(specials.has(str.charAt(i)))
     {
-      newMessage += `:${specials.get(text.charAt(i))}:`;
+      emojiText += `:${specials.get(str.charAt(i))}:`;
     }
     else
     {
-      newMessage += text.charAt(i);
+      emojiText += str.charAt(i);
     }
   }
 
-  message.edit(newMessage);
+  return emojiText;
+}
+
+function SubstringBetweenDelimiters (str, startDelimiter, endDelimiter)
+{
+  var startPos = str.indexOf(startDelimiter) + startDelimiter.length;
+  var endPos = str.indexOf(endDelimiter, startPos);
+  return str.substring(startPos, endPos)
 }
 
 //Sends an lmgtfy link with your message
@@ -86,6 +110,7 @@ function LMGTFYSearch (message)
   lmgtfyURL = `http://www.lmgtfy.com/?q=${encodeURI(search)}`;
 
   message.edit(lmgtfyURL);
+  return message;
 }
 
 //Deletes your messages from your current channel.

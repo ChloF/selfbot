@@ -56,7 +56,7 @@ The shortcuts are all stored in the file '*shortcuts.json*', to add extra shortc
 `"[shortcut name]" : "[shortcut text]"`
 
 
-**Emojification**: Have you ever had a point so strong normal letters couldn't get it across? Now you can make it better... with Emojis! This command converts letters into letter Emojis. The way to use this command is `{[Message]`, for example `{hello`.
+**Emojification**: Have you ever had a point so strong normal letters couldn't get it across? Now you can make it better... with Emojis! This command converts letters into letter Emojis. The way to use this command is `<emoji>[Message]</emoji>`, for example `<emoji>hello</emoji>`. This command an be used in the middle of a message and multiple times in a message.
 
 **LMGTFY**: Ah yes, everyone's favourite way to humiliate a stupid question. If you don't know what LMGTFY is then click this link: http://lmgtfy.com/?q=What+is+LMGTFY%3F. To use this command, type in `|[Search Query]`. For example, you could do `|How to do things`
 
