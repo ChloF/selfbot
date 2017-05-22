@@ -12,7 +12,7 @@ client.on('message', message =>
   if (message.author !== client.user) return;
 
   let shortcutPrefix = '/';
-  if (message.content.startsWith(shortcutPrefix)) ProcessShortcut(message);
+  if (message.content.indexOf(shortcutPrefix) != -1) ProcessShortcut(message);
 
   let emojifyPrefix = '{';
   if (message.content.startsWith(emojifyPrefix)) Emojify(message);
@@ -29,9 +29,13 @@ client.on('message', message =>
 //Example : '/lenny', ( ͡° ͜ʖ ͡°)
 function ProcessShortcut(message)
 {
-  let shortcut = message.content.slice(1);
-  setTimeout(() => {message.edit(shortcuts[shortcut])}, 0);
-  return;
+  var text = message.content;
+
+  for (var key in shortcuts)
+  {
+    text = text.replace(`/${key}`, shortcuts[key]);
+  }
+  setTimeout(() => {message.edit(text)}, 0);
 }
 
 //Converts the text in your message to emojis
