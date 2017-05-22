@@ -45,6 +45,12 @@ The shortcuts are:
   `facepalm` and
   `facedesk`
 
+These shortcuts can be used in the middle of messages and multiple times in one message, so a situation like:
+
+`Hey, I can do /lenny and /tableflip`
+
+Would work fine.
+
 The shortcuts are all stored in the file '*shortcuts.json*', to add extra shortcuts, you need to edit this file. Every command needs to be on a new line (The previous one being terminated with a comma). The syntax is like this:
 
 `"[shortcut name]" : "[shortcut text]"`
