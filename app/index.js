@@ -24,9 +24,6 @@ client.on('message', message =>
   if (message.content.startsWith(purgePrefix)) Purge(message)
 });
 
-//A way of sending some unique messages easily
-//Usage : '/[Shortcut]'
-//Example : '/lenny', ( ͡° ͜ʖ ͡°)
 function ProcessShortcut(message)
 {
   var text = message.content;
@@ -39,9 +36,6 @@ function ProcessShortcut(message)
   return message;
 }
 
-//Converts the text in your message to emojis
-//Usage : '<[Message]'
-//Example : '<I am obnoxious', https://cdn.discordapp.com/attachments/202157023184420865/315406499231039488/unknown.png
 function Emojify(message)
 {
   let text = message.content;
@@ -84,9 +78,6 @@ function StringToEmojis (str)
   return emojiText;
 }
 
-//Sends an lmgtfy link with your message
-//Usage : '|[Search Query]'
-//Example : '|HOW TO DO THINGS', http://www.lmgtfy.com/?q=HOW%20TO%20DO%20THINGS
 function LMGTFYSearch (message)
 {
   let text = message.content;
@@ -124,9 +115,6 @@ function SubstringBetweenDelimiters (str, startDelimiter, endDelimiter)
   return str.substring(startPos, endPos)
 }
 
-//Deletes your messages from your current channel.
-//Usage : '*[Number of messages to delete]'
-//Example : '*100', deletes your last 100 messages from the channel you are in
 function Purge (message)
 {
   count = parseInt(message.content.slice(1));
