@@ -17,8 +17,8 @@ client.on('message', message =>
   let emojifyPrefix = '<emoji>';
   if (message.content.indexOf(emojifyPrefix) != -1) Emojify(message);
 
-  let lmgtfyPrefix = '|';
-  if (message.content.startsWith(lmgtfyPrefix)) LMGTFYSearch(message);
+  let lmgtfyPrefix = '<lmgtfy>';
+  if (message.content.indexOf(lmgtfyPrefix) != -1) LMGTFYSearch(message);
 
   let purgePrefix = '*'
   if (message.content.startsWith(purgePrefix)) Purge(message)
@@ -46,19 +46,9 @@ function Emojify(message)
 {
   let text = message.content;
 
-  while (text.indexOf('<emoji>') != -1)
-  {
-    emojiText = SubstringBetweenDelimiters(text, '<emoji>', '</emoji>');
-
-    emojiText = StringToEmojis (emojiText.toLowerCase());
-
-    text = text.replace(SubstringBetweenDelimiters(text, '<emoji>', '</emoji>'), emojiText);
-    text = text.replace('<emoji>', '');
-    text = text.replace('</emoji>', '');
-  }
+  text = ModifyTextBetweenTags(text, 'emoji', StringToEmojis);
 
   setTimeout(() => {message.edit(text)}, 0);
-  return message;
 }
 
 function StringToEmojis (str)
@@ -94,23 +84,44 @@ function StringToEmojis (str)
   return emojiText;
 }
 
-function SubstringBetweenDelimiters (str, startDelimiter, endDelimiter)
-{
-  var startPos = str.indexOf(startDelimiter) + startDelimiter.length;
-  var endPos = str.indexOf(endDelimiter, startPos);
-  return str.substring(startPos, endPos)
-}
-
 //Sends an lmgtfy link with your message
 //Usage : '|[Search Query]'
 //Example : '|HOW TO DO THINGS', http://www.lmgtfy.com/?q=HOW%20TO%20DO%20THINGS
 function LMGTFYSearch (message)
 {
-  let search = message.content.slice(1);
-  lmgtfyURL = `http://www.lmgtfy.com/?q=${encodeURI(search)}`;
+  let text = message.content;
 
-  message.edit(lmgtfyURL);
-  return message;
+  text = ModifyTextBetweenTags(text, 'lmgtfy', StringToLMGTFYSearch);
+
+  setTimeout(() => {message.edit(text)}, 0);
+}
+
+function  StringToLMGTFYSearch (str)
+{
+  return `http://www.lmgtfy.com/?q=${encodeURI(str)}`;
+}
+
+function ModifyTextBetweenTags (str, tagname, replaceFunction)
+{
+  while (str.indexOf(`<${tagname}>`) != -1)
+  {
+    let modifiedText = SubstringBetweenDelimiters(str, `<${tagname}>`, `</${tagname}>`);
+
+    modifiedText = replaceFunction (modifiedText.toLowerCase());
+
+    str = str.replace(SubstringBetweenDelimiters(str, `<${tagname}>`, `</${tagname}>`), modifiedText);
+    str = str.replace(`<${tagname}>`, '');
+    str = str.replace(`</${tagname}>`, '');
+  }
+
+  return str;
+}
+
+function SubstringBetweenDelimiters (str, startDelimiter, endDelimiter)
+{
+  var startPos = str.indexOf(startDelimiter) + startDelimiter.length;
+  var endPos = str.indexOf(endDelimiter, startPos);
+  return str.substring(startPos, endPos)
 }
 
 //Deletes your messages from your current channel.
