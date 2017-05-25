@@ -55,7 +55,8 @@ function StringToEmojis (str)
     ['!', 'exclamation'],
     ['+', 'heavy_plus_sign'],
     ['-', 'heavy_minus_sign'],
-    ['.', 'black_small_square']
+    ['.', 'black_small_square'],
+    [' ', 'black_large_square']
   ])
 
   let emojiText = '';
